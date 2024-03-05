@@ -29,7 +29,18 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# class User(AbstractUser):
+#     @property
+#     def is_student(self):
+#         if hasattr(self, 'student'):
+#             return True
+#         return False
 
+#     @property
+#     def is_teacher(self):
+#         if hasattr(self, 'teacher'):
+#             return True
+#         return False
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +51,7 @@ INSTALLED_APPS = [
     
     
     #myapps
-    'accounts'
+    'users'
 
 ]
 
@@ -126,3 +137,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'users.User'
