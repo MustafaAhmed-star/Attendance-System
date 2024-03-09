@@ -1,5 +1,7 @@
 from django.db import models
+from users.models import User
 class Person(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,  related_name='%(class)s_user',null = True , blank=True)
     name = models.CharField(max_length=100)
     idc = models.IntegerField(primary_key=True)
     department = models.ForeignKey('Department', related_name='%(class)s_department', on_delete=models.CASCADE)
