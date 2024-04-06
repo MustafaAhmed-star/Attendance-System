@@ -8,7 +8,7 @@ class Person(models.Model):
     class Meta:
         abstract = True
 class Doctor(Person):
-    subject = models.ForeignKey('Subject', related_name='doctor_subject', on_delete=models.CASCADE)
+    subject = models.ManyToManyField('Subject', related_name='doctor_subject')
     level = models.ManyToManyField('Level', related_name='doctor_level')
     
     def __str__(self):
@@ -32,11 +32,29 @@ class Level(models.Model):
     lname = models.CharField(max_length=100)
     def __str__(self):
         return self.lname
+# class Attendance(models.Model):
+#     student = models.ForeignKey('Student', related_name='attendance_student', on_delete=models.CASCADE)
+#     date = models.DateField(auto_now_add=True)
+#     status = models.BooleanField(default=False)
+    
+#     def __str__(self):
+#         return f'{self.student} - {self.date} - {self.status}'
+   
 class Attendance(models.Model):
-    student = models.ForeignKey('Student', related_name='attendance_student', on_delete=models.CASCADE)
+    student = models.ForeignKey('Student', related_name='attendance_student', on_delete=models.CASCADE,null=True, blank=True)
+    subject = models.ForeignKey('Subject', related_name='attendance_subject', on_delete=models.CASCADE,null=True, blank=True)  # حقل جديد للمادة
     date = models.DateField(auto_now_add=True)
     status = models.BooleanField(default=False)
     
     def __str__(self):
-        return f'{self.student} - {self.date} - {self.status}'
-    
+        return f'{self.student} - {self.subject} - {self.date} - {self.status}'
+        
+        
+# class Session(models.Model):
+#     title = models.CharField(max_length=100)
+#     start_date = models.DateField()
+#     end_date = models.DateField()
+#     subjects = models.ManyToManyField('Subject', related_name='sessions')
+
+#     def __str__(self):
+#         return self.title

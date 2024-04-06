@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>تسجيل الحضور</title>
+</head>
+<body>
+    <h2>تسجيل الحضور</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">تسجيل</button>
+    </form>
+</body>
+</html>

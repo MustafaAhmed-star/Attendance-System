@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEAM</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css">
+</head>
+<body>
+<!-- nav-bar -->
+<nav class="navbar navbar-expand-lg navbar-dark  bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">PX7</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    
+   
+  </div>
+</nav>
+
+<!-- nav-bar -->
+
+
+
+<!-- of-canvase -->
+
+
+
+
+  <!-- of-canvase -->
+
+  <!-- main -->
+  <form method="post" action="{% url 'submit_attendance' %}">
+    {% csrf_token %}
+<!-- في مكان إضافة الإدخالات لحالة الحضور والغياب -->
+{% for student in students %}
+    <div class="student-attendance">
+        <span>{{ student.name }}</span> <!-- افترض أن لديك حقل name في نموذج Student -->
+        <!-- إضافة إدخالات الراديو لتسجيل الحضور والغياب -->
+        <input type="hidden" name="student_ids" value="{{ student.idc }}">
+
+        <input type="radio" id="present_{{ student.idc }}" name="attendance_{{ student.idc }}" value="present">
+        <label for="present_{{ student.idc }}">Present</label>
+        <input type="radio" id="absent_{{ student.idc }}" name="attendance_{{ student.idc }}" value="absent">
+        <label for="absent_{{ student.idc }}">Absent</label>
+    </div>
+{% endfor %}    
+<button type="submit">Submit Attendance</button>
+</form>
+
+  </div>
+
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+{% endif %}
+
+  <!-- main -->
+
+<script>
+document.getElementById('markAllPresent').addEventListener('click', function() {
+    document.querySelectorAll('input[type="radio"][value="present"]').forEach(function(radio) {
+        radio.checked = true;
+    });
+});
+
+document.getElementById('markAllAbsent').addEventListener('click', function() {
+    document.querySelectorAll('input[type="radio"][value="absent"]').forEach(function(radio) {
+        radio.checked = true;
+    });
+});
+</script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
+
