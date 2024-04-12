@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEAM</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-icons-1.11.3/font/bootstrap-icons.css' %}">
+</head>
+<body>
+<!-- nav-bar -->
+<nav class="navbar navbar-expand-lg navbar-dark  bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">PX7</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    
+   
+  </div>
+</nav>
+
+<!-- nav-bar -->
+
+
+
+<!-- of-canvase -->
+
+
+
+<div class="offcanvas offcanvas-start  text-white " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  
+  <div class="offcanvas-body p-0">
+    <nav class="navbar-dark">
+      <ul class="navbar-nav" style="margin-top: 15px;">
+        <li>
+            <div class="text-white small fw-bold text-uppercase px-3 ">
+              Doctor Interface
+            </div>
+        </li>
+        <li>
+            <hr class="dropdown-divider/">
+        </li>
+        <li>
+          <div class="text-white small fw-bold text-uppercase px-3 ">
+            Ahmed Farrag Tantawy
+          </div>
+      </li>
+      <li>
+        <hr class="dropdown-divider/">
+    </li>
+    <li>
+        <div class="text-white small fw-bold text-uppercase px-3 ">
+          Attendance
+        </div>
+    </li>
+        <li>
+          <a href="../Doctor interface/subjects.html" class="nav-link px-3 active">
+            <span class="me-2"><i class="bi bi-table"></i></span>
+            <span>Subject</span>
+          </a>
+        </li>
+        <li>
+            <hr class="dropdown-divider/">
+        </li>
+        <li>
+            <div class="text-white small fw-bold text-uppercase px-3 ">
+              Time Table
+            </div>
+        </li>
+        <li>
+          <a href="../Doctor interface/Time_table_doc.html" class="nav-link px-3">
+            <span class="me-2"><i class="bi bi-table"></i></span>
+            <span>Time Table</span>
+          </a>
+        </li>
+        <li>
+            <hr class="dropdown-divider/">
+        </li>
+        <li>
+            <div class="text-white small fw-bold text-uppercase px-3 ">
+              Chat
+            </div>
+        </li>
+        <li>
+            <a href="../Doctor interface/messages.html" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-chat-text"></i></span>
+              <span>Messages</span>
+              <span class="badge text-bg-danger" id="right_icon">4</span>
+            </a>
+          </li>
+
+      <li>
+        <hr class="dropdown-divider/">
+    </li>
+      
+      <li>
+        <a href="#" class="nav-link px-3">
+          <span class="me-2"><i class="bi bi-box-arrow-right"></i></span>
+          <span>Log Out</span>
+        </a>
+      </li>
+        
+
+        
+
+
+        
+
+      </ul>
+
+    </nav>
+
+  </div>
+
+
+
+
+  </div>
+</div>
+
+
+  <!-- of-canvase -->
+
+  <!-- main -->
+
+ <div class="container-fluid mt-5 pt-3" id="main">
+    <div class="container-fluid" id="cont">
+      <div class="row">
+        <div class="col-lg-12">
+         
+        <!-- تكرار على المستويات والمواد -->
+{% for level, subjects in subjects_by_level.items %}
+<div class="card shadow">
+  <h5 class="card-header bg-dark text-white">{{ level.lname }}</h5>
+  <div class="card-body">
+    <div class="row">
+      {% for subject in subjects %}
+        <div class="col-lg-3">
+          <div class="card" id="cont">
+            <!-- استبدل بصورة المادة إذا كان لديك حقل للصورة في نموذج Subject -->
+            <img src="{% static 'image/wallpaperflare.com_wallpaper(4).jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ subject.sname }}</h5>
+              <!-- استبدل بوصف المادة إذا كان لديك حقل للوصف -->
+              <p class="card-text">Description here</p>
+              <a href="/lec_attendance/" class="btn btn-primary">Take Attendance</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+        
+        
+        
+        
+        
+        
+      
+
+  
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

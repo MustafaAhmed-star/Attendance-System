@@ -21,6 +21,7 @@ class Student(Person):
         return self.name
 class Subject(models.Model):
     sname = models.CharField(max_length=100)
+    level = models.ForeignKey('Level', related_name='subject_level', on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return self.sname
