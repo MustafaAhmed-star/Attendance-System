@@ -22,7 +22,7 @@ class Student(Person):
 class Subject(models.Model):
     sname = models.CharField(max_length=100)
     level = models.ForeignKey('Level', related_name='subject_level', on_delete=models.CASCADE,null=True,blank=True)
-
+    image = models.ImageField(upload_to='subjects/', null=True, blank=True)
     def __str__(self):
         return self.sname
 class Department(models.Model):
