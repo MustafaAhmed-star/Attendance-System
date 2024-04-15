@@ -50,9 +50,10 @@ def subjects_by_level(request):
     subjects = Subject.objects.filter(level__in=doctor.level.all())
     levels = doctor.level.all()
 
-    subjects_by_level = {}
-    for level in levels:
-        subjects_for_level = subjects.filter(level=level)
-        subjects_by_level[level] = subjects_for_level
+    # subjects_by_level = {}
+    # for level in levels:
+    #     subjects_for_level = subjects.filter(level=level)
+    #     subjects_by_level[level] = subjects_for_level
+    subjects_by_level = {level: [subject for subject in subjects if subject.level == level] for level in levels}
 
     return render(request, 'subjects/subject_list.html', {'subjects_by_level': subjects_by_level})
