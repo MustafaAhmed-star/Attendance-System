@@ -2,10 +2,12 @@ from django.shortcuts import render
 from .models import Doctor, Student, Attendance, Subject, Level
 from django.contrib.auth.decorators import login_required
 from collections import defaultdict
+from django.urls import reverse
 
 from django.shortcuts import render, redirect
 from .models import Doctor, Student
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 @login_required
 def lec_attendance(request):
@@ -19,8 +21,6 @@ def lec_attendance(request):
     return render(request, 'attendance/lec_attendance.html', {'students': students})
     
     
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 
 @login_required
 def submit_attendance(request):
