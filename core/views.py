@@ -18,7 +18,7 @@ def lec_attendance(request):
   
     doctor = request.user.doctor_user 
     students = Student.objects.filter(department=doctor.department, level__in=doctor.level.all()).distinct()
-    return render(request, 'attendance/lec_attendance.html', {'students': students})
+    return render(request, 'attendance/tae.html', {'students': students})
     
     
 
@@ -26,14 +26,17 @@ def lec_attendance(request):
 def submit_attendance(request):
     if request.method == 'POST':
         student_ids = request.POST.getlist('student_ids')
+        print('<<<<<<<<<<<<<<<<<<<<<<<<<<')
         for student_id in student_ids:
             attendance_status = request.POST.get(f'attendance_{student_id}', 'absent') 
             student = Student.objects.get(idc=student_id)
-          
+            print('attttttttttttttttttttttttttttt')
             Attendance.objects.update_or_create(
                 student=student,
                 defaults={'status': attendance_status == 'present'}
             )
+            print('doneeeeeeeeeeee')
+
         return HttpResponseRedirect(reverse('lec_attendance'))
     else:
        
