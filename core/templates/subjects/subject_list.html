@@ -20,6 +20,8 @@
   <div class="card-body">
     <div class="row">
       {% for subject in subjects %}
+      {% if subject.id %}
+
         <div class="col-lg-3">
           <div class="card" id="cont">
             <!-- استبدل بصورة المادة إذا كان لديك حقل للصورة في نموذج Subject -->
@@ -34,10 +36,11 @@
               <h5 class="card-title">{{ subject.sname }}</h5>
               <!-- استبدل بوصف المادة إذا كان لديك حقل للوصف -->
               <p class="card-text">Description here</p>
-              <a href="/lec_attendance/" class="btn btn-primary">Take Attendance</a>
-            </div>
+              <a href="{% url 'lec_attendance' subject.id %}" class="btn btn-primary">Take Attendance</a>            
+              </div>
           </div>
         </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>

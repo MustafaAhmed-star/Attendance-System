@@ -1,59 +1,65 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    
-    
-  <!-- of-canvase -->
-
-  <div class="container-fluid mt-5 pt-3" id="main">
+<div class="container-fluid mt-5 pt-3" id="main">
     <div class="container-fluid" id="cont">
         <div class="row">
             <div class="col-md-12">
-  <form method="post" action="{% url 'submit_attendance' %}">
-    {% csrf_token %}
-<!-- في مكان إضافة الإدخالات لحالة الحضور والغياب -->
-{% for student in students %}
-    <div class="student-attendance">
-        <span>{{ student.name }}</span> <!-- افترض أن لديك حقل name في نموذج Student -->
-        <!-- إضافة إدخالات الراديو لتسجيل الحضور والغياب -->
-        <input type="hidden" name="student_ids" value="{{ student.idc }}">
+                <form method="post" action="{% url 'submit_attendance' subject.id %}">
+                    <input type="hidden" name="subject_id" value="{{ subject.id }}">
 
-        <input class="btn-check" type="radio" id="present_{{ student.idc }}" name="attendance_{{ student.idc }}" value="present">
-        <label class="btn btn-outline-success" for="present_{{ student.idc }}">Present</label>
-        <input  class="btn-check" type="radio" id="absent_{{ student.idc }}" name="attendance_{{ student.idc }}" value="absent">
-        <label  class="btn btn-outline-danger" for="absent_{{ student.idc }}">Absent</label>
+                    {% csrf_token %}
+
+                    <table class="table table-striped table-hover text-center shadow" id="cont">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Attendance</th>
+                                <th scope="col">Absent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in students %}
+                            <tr>
+                                <td>{{ student.idc }}</td>
+                                <td>{{ student.name }}</td>
+                                <td>
+                                    <input type="hidden" name="student_ids" value="{{ student.idc }}">
+
+                                    <input type="radio" class="btn-check" id="present_{{ student.idc }}" name="attendance_{{ student.idc }}" value="present">
+                                    <label class="btn btn-outline-success" for="present_{{ student.idc }}">Present</label>
+                                </td>
+                                <td>
+                                    <input type="radio" class="btn-check" id="absent_{{ student.idc }}" name="attendance_{{ student.idc }}" value="absent">
+                                    <label class="btn btn-outline-danger" for="absent_{{ student.idc }}">Absent</label>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
     </div>
-{% endfor %}    
-<button type="submit">Submit Attendance</button>
-</div>
-</form>
-</div>
-</div>
-
-  </div>
-
-  {% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-  </ul>
 {% endif %}
+        </div>
+    </div>
+</div>
 
-  <!-- main -->
 
-<script>
-document.getElementById('markAllPresent').addEventListener('click', function() {
-    document.querySelectorAll('input[type="radio"][value="present"]').forEach(function(radio) {
-        radio.checked = true;
-    });
-});
-
-document.getElementById('markAllAbsent').addEventListener('click', function() {
-    document.querySelectorAll('input[type="radio"][value="absent"]').forEach(function(radio) {
-        radio.checked = true;
-    });
-});
 
 {% endblock body %}
-
