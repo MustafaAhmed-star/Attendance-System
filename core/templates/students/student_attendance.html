@@ -1,34 +1,10 @@
-<!DOCTYPE html>
-{% load static %}
+{% extends 'base.html' %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEAM</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap-icons-1.11.3/font/bootstrap-icons.css' %}">
-</head>
-<body>
-<!-- nav-bar -->
-<nav class="navbar navbar-expand-lg navbar-dark  bg-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">PX7</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+{% block body %}
+    
 
     
-   
-  </div>
-</nav>
 
-<!-- nav-bar -->
-
-
-
-<!-- of-canvase -->
 
 
 
@@ -39,11 +15,7 @@
       <ul class="navbar-nav" style="margin-top: 15px;">
         <li>
             <div class="text-white small fw-bold text-uppercase px-3 ">
-              {% if request.user.is_doctor %}
-                Doctor Interface
-              {% else %}
-                Student Interface
-              {% endif %}
+              Student Interface
             </div>
         </li>
         <li>
@@ -51,14 +23,7 @@
         </li>
         <li>
           <div class="text-white small fw-bold text-uppercase px-3 ">
-            {% if request.user.is_doctor %}
-
-            {{request.user.doctor_user.name}}
-            {% else %}
-            {{request.user.student_user.name}}
-            {% endif %}
-
-
+            Ahmed Farrag Tantawy
           </div>
       </li>
       <li>
@@ -70,9 +35,9 @@
         </div>
     </li>
         <li>
-          <a href="/subjects" class="nav-link px-3 active">
+          <a href="../student interface/view_attendance.html" class="nav-link px-3 active">
             <span class="me-2"><i class="bi bi-table"></i></span>
-            <span>Subject</span>
+            <span>Veiw Attendance</span>
           </a>
         </li>
         <li>
@@ -84,7 +49,7 @@
             </div>
         </li>
         <li>
-          <a href="../Doctor interface/Time_table_doc.html" class="nav-link px-3">
+          <a href="../student interface/time_table_stu.html" class="nav-link px-3">
             <span class="me-2"><i class="bi bi-table"></i></span>
             <span>Time Table</span>
           </a>
@@ -98,7 +63,7 @@
             </div>
         </li>
         <li>
-            <a href="../Doctor interface/messages.html" class="nav-link px-3">
+            <a href="../student interface/messages.html" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-chat-text"></i></span>
               <span>Messages</span>
               <span class="badge text-bg-danger" id="right_icon">4</span>
@@ -134,13 +99,46 @@
   </div>
 </div>
 
+  <div class="container-fluid mt-5 pt-3" id="main">
 
-{% block body %}
+
+    <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12  fw-bold fs-3">Lectures</div>
+          </div>
+        </div>
+        <table class="table table-striped table-hover text-center" id="table">
+          <thead class="table-secondary">
+            <tr>
+              <th scope="col">Subject</th>
+              
+                {% for date in dates_list %}
+              <th scope="col">{{ date|date:"m-d" }}</th> 
+                {% endfor %}
+                
+             
+             
+              {% comment %} <th scope="col">sum</th> {% endcomment %}
+            </tr>
+          </thead>
+          <tbody>
+           
+            {% for record in attendance_records %}
+            <tr>
+                <th scope="row">{{ record.subject }}</th>
+                {% for attendance in record.records %}
+                    <td id="{{ attendance.status|yesno:'true,false' }}"><i class="bi bi-{{ attendance.status|yesno:'check2,x' }}"></i></td>
+                {% endfor %}
+                {% comment %} <th scope="row">{{ record.present_count }}/{{ record.total }}</th> {% endcomment %}
+            </tr>
+        {% endfor %}
+           
+          </tbody>
+        </table>
+        
+      </div>
+
+</div>
     
 {% endblock body %}
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-</body>
-
-
-</html>

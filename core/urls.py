@@ -7,4 +7,7 @@ urlpatterns = [
 path('lec_attendance/<int:subject_id>', views.lec_attendance, name='lec_attendance'),
 path('submit_attendance/<int:subject_id>', views.submit_attendance, name='submit_attendance'),
 path('subjects/', views.subjects_by_level, name='subjects_by_level'),
+path('view_attendance/', views.view_attendance, name='view_attendance'),
+#---------------------------------------------
+
 ]   

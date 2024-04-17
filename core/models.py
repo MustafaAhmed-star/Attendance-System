@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from django.utils import timezone
 class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,  related_name='%(class)s_user',null = True , blank=True)
     name = models.CharField(max_length=100)
@@ -44,7 +45,7 @@ class Level(models.Model):
 class Attendance(models.Model):
     student = models.ForeignKey('Student', related_name='attendance_student', on_delete=models.CASCADE,null=True, blank=True)
     subject = models.ForeignKey('Subject', related_name='attendance_subject', on_delete=models.CASCADE,null=True, blank=True)  # حقل جديد للمادة
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(default = timezone.now)
     status = models.BooleanField(default=False)
     
     def __str__(self):
