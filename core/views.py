@@ -1,6 +1,6 @@
 from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Doctor, Student, Attendance, Subject, Level
+from .models import Doctor, Student, Attendance, Subject, Level,TimeTable
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -119,3 +119,29 @@ def view_attendance(request):
         'attendance_records': attendance_records,
         'dates_list': dates_list   
     })
+
+
+### Time Table
+@login_required
+def showTimeTable(request):
+    user = request.user
+    if  user.is_student:
+        level = user.student_user.level 
+        department = user.student_user.department
+        try:
+            time_table = TimeTable.objects.get(level=level, department=department)
+            context = {'time_table_image': time_table.Timage}
+            return render(request, 'time_table.html', context)
+        except TimeTable.DoesNotExist:
+            return render(request, 'time_table.html')
+    else: 
+        level = user.doctor_user.level  
+        department = user.doctor_user.department
+        try:
+            time_table = TimeTable.objects.get(level=level, department=department)
+            context = {'time_table_image': time_table.Timage}
+            return render(request, 'time_table.html', context)
+        except TimeTable.DoesNotExist:
+            return render(request, 'time_table.html')
+        
+   
