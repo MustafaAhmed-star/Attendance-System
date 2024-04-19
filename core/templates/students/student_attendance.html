@@ -8,96 +8,7 @@
 
 
 
-<div class="offcanvas offcanvas-start  text-white " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  
-  <div class="offcanvas-body p-0">
-    <nav class="navbar-dark">
-      <ul class="navbar-nav" style="margin-top: 15px;">
-        <li>
-            <div class="text-white small fw-bold text-uppercase px-3 ">
-              Student Interface
-            </div>
-        </li>
-        <li>
-            <hr class="dropdown-divider/">
-        </li>
-        <li>
-          <div class="text-white small fw-bold text-uppercase px-3 ">
-            Ahmed Farrag Tantawy
-          </div>
-      </li>
-      <li>
-        <hr class="dropdown-divider/">
-    </li>
-    <li>
-        <div class="text-white small fw-bold text-uppercase px-3 ">
-          Attendance
-        </div>
-    </li>
-        <li>
-          <a href="../student interface/view_attendance.html" class="nav-link px-3 active">
-            <span class="me-2"><i class="bi bi-table"></i></span>
-            <span>Veiw Attendance</span>
-          </a>
-        </li>
-        <li>
-            <hr class="dropdown-divider/">
-        </li>
-        <li>
-            <div class="text-white small fw-bold text-uppercase px-3 ">
-              Time Table
-            </div>
-        </li>
-        <li>
-          <a href="../student interface/time_table_stu.html" class="nav-link px-3">
-            <span class="me-2"><i class="bi bi-table"></i></span>
-            <span>Time Table</span>
-          </a>
-        </li>
-        <li>
-            <hr class="dropdown-divider/">
-        </li>
-        <li>
-            <div class="text-white small fw-bold text-uppercase px-3 ">
-              Chat
-            </div>
-        </li>
-        <li>
-            <a href="../student interface/messages.html" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-chat-text"></i></span>
-              <span>Messages</span>
-              <span class="badge text-bg-danger" id="right_icon">4</span>
-            </a>
-          </li>
 
-      <li>
-        <hr class="dropdown-divider/">
-    </li>
-      
-      <li>
-        <a href="#" class="nav-link px-3">
-          <span class="me-2"><i class="bi bi-box-arrow-right"></i></span>
-          <span>Log Out</span>
-        </a>
-      </li>
-        
-
-        
-
-
-        
-
-      </ul>
-
-    </nav>
-
-  </div>
-
-
-
-
-  </div>
-</div>
 
   <div class="container-fluid mt-5 pt-3" id="main">
 
@@ -114,7 +25,9 @@
               <th scope="col">Subject</th>
               
                 {% for date in dates_list %}
-              <th scope="col">{{ date|date:"m-d" }}</th> 
+                <th scope="col">lec {{ forloop.counter }}</th>
+
+              {% comment %} <th scope="col">{{ date|date:"m-d" }}</th>  {% endcomment %}
                 {% endfor %}
                 
              
