@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+        'django_extensions',
 
     # myapps
     'core',
@@ -275,4 +275,8 @@ JAZZMIN_SETTINGS = {
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
     # Add a language dropdown into the admin
     # "language_chooser": True,
+}
+GRAPH_MODELS = {
+    'all_applications': False,
+    'group_models': True,
 }
