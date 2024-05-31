@@ -8,6 +8,9 @@ from django.contrib import messages
 # from django.db.models import Q
 # from django.utils.timezone import localtime, now
 
+def home(request):
+    
+    return render(request,'home.html',{})
 
 @login_required
 def lec_attendance(request, subject_id=None):
