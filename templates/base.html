@@ -30,13 +30,13 @@
 
 <!-- of-canvase -->
 
+{% if  user.is_authenticated %}
 
 
 <div class="offcanvas offcanvas-start  text-white " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   
   <div class="offcanvas-body p-0">
     <nav class="navbar-dark">
-      {% if  user.is_authenticated %}
 
       <ul class="navbar-nav" style="margin-top: 15px;">
         <li>
@@ -127,7 +127,6 @@
 
 
         
-    {% endif %}
       </ul>
 
     </nav>
@@ -135,6 +134,7 @@
   </div>
 
 
+  {% endif %}
 
 
   </div>
