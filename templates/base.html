@@ -36,13 +36,19 @@
   
   <div class="offcanvas-body p-0">
     <nav class="navbar-dark">
+      {% if  user.is_authenticated %}
+
       <ul class="navbar-nav" style="margin-top: 15px;">
         <li>
             <div class="text-white small fw-bold text-uppercase px-3 ">
               {% if request.user.is_doctor %}
                 Doctor Interface
-              {% else %}
+              {% elif  request.user.is_student %}
+
                 Student Interface
+                
+               {%else%}
+                Admin Interface
               {% endif %}
             </div>
         </li>
@@ -121,7 +127,7 @@
 
 
         
-
+    {% endif %}
       </ul>
 
     </nav>

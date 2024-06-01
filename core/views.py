@@ -8,6 +8,8 @@ from django.contrib import messages
 # from django.db.models import Q
 # from django.utils.timezone import localtime, now
 
+
+@login_required
 def home(request):
     
     return render(request,'home.html',{})
