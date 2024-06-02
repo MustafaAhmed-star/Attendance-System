@@ -76,7 +76,7 @@
         </div>
     </li>
         <li>
-          <a href="/subjects" class="nav-link px-3 active">
+          <a href="{% if request.user.is_student %}/view_attendance {% else %}/subjects {% endif %}" class="nav-link px-3 active">
             <span class="me-2"><i class="bi bi-table"></i></span>
             <span>Subject</span>
           </a>
