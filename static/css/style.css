@@ -11,6 +11,7 @@ body{
   background-color: #000000;
 }
 #offcanvasExample{
+  z-index: 300;
   width: var(--offcanvas-width);
   background-color: #383838;
 }

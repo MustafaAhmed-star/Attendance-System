@@ -283,6 +283,10 @@ GRAPH_MODELS = {
 }
 
 
+AUTHENTICATION_BACKENDS = [
+    'users.backends.AdminBackend',  
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 #REDIRECTS URLS
 LOGIN_REDIRECT_URL = '/'
