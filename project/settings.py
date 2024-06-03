@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
+    'users',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
 
     # myapps
     'core',
-    'users',
+    
 
 ]
 
