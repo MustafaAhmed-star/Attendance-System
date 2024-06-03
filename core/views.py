@@ -79,8 +79,8 @@ def subjects_by_level(request):
 
         return redirect('/')
     doctor = request.user.doctor_user
-    subjects = Subject.objects.filter(level__in=doctor.level.all())
     levels = doctor.level.all()
+    subjects = Subject.objects.filter(level__in=levels, doctor_subject=doctor)
 
     # subjects_by_level = {}
     # for level in levels:
