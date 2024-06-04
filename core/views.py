@@ -21,21 +21,22 @@ def lec_attendance(request, subject_id=None):
         return redirect('/')
 
     doctor = request.user.doctor_user
-    students = Student.objects.filter(
-        department=doctor.department, level__in=doctor.level.all()).distinct()
 
     if subject_id:
         subject = get_object_or_404(Subject, id=subject_id)
+        students = Student.objects.filter(
+            department=doctor.department,
+            level__in=doctor.level.all(),
+            subject=subject
+        ).distinct()
         return render(request, 'attendance/lec_attendance.html', {'students': students, 'subject': subject})
     else:
         subjects = Subject.objects.filter(level__in=doctor.level.all())
-        return render(request, 'attendance/lec_attendance.html', {'students': students, 'subjects': subjects})
-
+        return render(request, 'attendance/lec_attendance.html', {'subjects': subjects})
 
 @login_required
 def submit_attendance(request, subject_id):
     if request.method == 'POST':
-
         subject = get_object_or_404(Subject, id=subject_id)
         student_ids = request.POST.getlist('student_ids')
         absent_students = []
