@@ -11,7 +11,8 @@ from django.contrib import messages
 
 @login_required
 def home(request):
-    
+    if not request.user.is_student and not request.user.is_doctor:
+        return redirect('/admin/')
     return render(request,'home.html',{})
 
 @login_required
