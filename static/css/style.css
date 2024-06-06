@@ -55,8 +55,8 @@ body{
     margin-left: var(--offcanvas-width);
   }
   .navbar{
-    margin-left: 300px;
-    
+    width: calc(100% - var(--offcanvas-width));
+    margin-left: var(--offcanvas-width);
   }
   #offcanvasExample{
     transform: none;
