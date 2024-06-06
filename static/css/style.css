@@ -8,11 +8,11 @@ body{
   --main-width:150px;
 }
 .navbar{
+  position: flex;
   background-color: #000000;
   
 }
 #offcanvasExample{
-  z-index: 300;
   width: var(--offcanvas-width);
   background-color: #343A40;
 }

@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from .models import User
+from .models import User ,Feedback
 from django.contrib.auth.hashers import make_password
 from core.models import Student, Doctor, Subject, Department, Level, Attendance, TimeTable
 from datetime import date
@@ -47,7 +47,10 @@ class AttendanceAdmin(admin.ModelAdmin):
     def count_attendance(self, obj):
         return Attendance.objects.filter(student=obj.student, subject=obj.subject,status = True).count()
     count_attendance.short_description = 'Total Attendance for Subject'
-
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('student', 'subject', 'created_at')
+    search_fields = ('student__username', 'subject')
+    list_filter = ('created_at',)
 # Register your models here.
 admin_site.register(Student)
 admin_site.register(Doctor)
@@ -56,3 +59,4 @@ admin_site.register(Department)
 admin_site.register(Level)
 admin_site.register(TimeTable)
 admin_site.register(Attendance, AttendanceAdmin)  # Register Attendance with AttendanceAdmin
+admin_site.register(Feedback,FeedbackAdmin)

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<div class="container-fluid mt-5 pt-3" id="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 fw-bold fs-3">Feedback</div>
+        </div>
+    </div>
+    <div class="container-sm" id="cont" style="max-width: 700px; margin-top: 100px;">
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header bg-dark text-white">
+                        Feedback
+                    </div>
+                    <form method="post" class="card-body">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_subject" class="form-label">Subject</label>
+                            {{ form.subject }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_comments" class="form-label">Message</label>
+                            {{ form.message }}
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </form>
+                    {% if messages %}
+                        <div class="mt-3">
+                            <ul class="text-success">
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if form.errors %}
+                        <div class="mt-3">
+                            <ul class="text-danger">
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messages = document.querySelectorAll('.messages .message');
+        if (messages.length > 0) {
+            alert('We will respond soon.');
+            window.location.href = "{% url 'home' %}";
+        }
+    });
+</script>
+{% endblock %}

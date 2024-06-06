@@ -12,7 +12,7 @@
 </head>
 <body>
 <!-- nav-bar -->
-<nav class="navbar navbar-expand-lg navbar-dark  bg-dark fixed-top">
+<nav class="navbar  navbar-dark  bg-dark fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">BST</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -78,7 +78,7 @@
         <li>
           <a href="{% if request.user.is_student %}/view_attendance {% else %}/subjects {% endif %}" class="nav-link px-3 active">
             <span class="me-2"><i class="bi bi-table"></i></span>
-            <span>Subject</span>
+            <span>Subjects</span>
           </a>
         </li>
         <li>
@@ -98,22 +98,28 @@
         <li>
             <hr class="dropdown-divider/">
         </li>
+        {% if request.user.is_doctor %}
+        {% else %}
         <li>
-            <div class="text-white small fw-bold text-uppercase px-3 ">
-              Chat
-            </div>
-        </li>
-        <li>
-            <a href="../Doctor interface/messages.html" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-chat-text"></i></span>
-              <span>Messages</span>
-              <span class="badge text-bg-danger" id="right_icon">4</span>
-            </a>
-          </li>
-
+          <div class="text-white small fw-bold text-uppercase px-3 ">
+            Feedback
+          </div>
+      </li>
+      <li>
+        <a href="/accounts/feedback/view" class="nav-link px-3">
+          <span class="me-2"><i class="bi bi-chat-text"></i></span>
+          <span>Feedbacks</span>
+          <span class="badge text-bg-danger" id="right_icon">4</span>
+        </a>
+      </li>
+      
       <li>
         <hr class="dropdown-divider/">
     </li>
+      {% endif %}
+       
+      
+
       
       <li>
         <a href="{% url 'logout' %}" class="nav-link px-3">
@@ -144,7 +150,13 @@
 {% block body %}
     
 {% endblock body %}
-
+{% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 </body>
