@@ -4,16 +4,17 @@ body{
 }
 :root{
   --offcanvas-width:270px;
-  --top_navpare_hight:56px;
+  --top_navpare_hight:0px;
   --main-width:150px;
 }
 .navbar{
   background-color: #000000;
+  
 }
 #offcanvasExample{
   z-index: 300;
   width: var(--offcanvas-width);
-  background-color: #383838;
+  background-color: #343A40;
 }
 #cont{
   margin-top: 20px;
@@ -52,6 +53,10 @@ body{
   #main{
     width: calc(100% - var(--offcanvas-width));
     margin-left: var(--offcanvas-width);
+  }
+  .navbar{
+    margin-left: 300px;
+    
   }
   #offcanvasExample{
     transform: none;
