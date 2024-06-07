@@ -54,15 +54,7 @@ class Level(models.Model):
 
     def __str__(self):
         return self.lname
-# class Attendance(models.Model):
-#     student = models.ForeignKey('Student', related_name='attendance_student', on_delete=models.CASCADE)
-#     date = models.DateField(auto_now_add=True)
-#     status = models.BooleanField(default=False)
-
-#     def __str__(self):
-#         return f'{self.student} - {self.date} - {self.status}'
-
-
+ 
 class Attendance(models.Model):
     student = models.ForeignKey('Student', related_name='attendance_student',
                                 on_delete=models.CASCADE, null=True, blank=True)
@@ -75,15 +67,7 @@ class Attendance(models.Model):
         return f'{self.student} - {self.subject} - {self.date} - {self.status}'
 
 
-# class Session(models.Model):
-#     title = models.CharField(max_length=100)
-#     start_date = models.DateField()
-#     end_date = models.DateField()
-#     subjects = models.ManyToManyField('Subject', related_name='sessions')
-
-#     def __str__(self):
-#         return self.title
-
+ 
 class TimeTable(models.Model):
     Timage = models.ImageField(upload_to='time_table/', null=True, blank=True)
     level = models.ForeignKey('Level', on_delete=models.CASCADE,
