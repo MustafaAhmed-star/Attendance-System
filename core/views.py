@@ -94,6 +94,9 @@ def subjects_by_level(request):
     return render(request, 'subjects/subject_list.html', {'subjects_by_level': subjects_by_level})
 
 
+
+ 
+ 
 # Student
 
 
@@ -130,27 +133,21 @@ def view_attendance(request):
 
 ### Time Table
 @login_required
-def showTimeTable(request):
-    user = request.user
-    if user.is_student:
-        level = user.student_user.level
-        department = user.student_user.department
-        try:
-            time_table = TimeTable.objects.get(level=level, department=department)
-            context = {'time_table_image': time_table.Timage}
-            return render(request, 'time_table.html', context)
-        except TimeTable.DoesNotExist:
-            return render(request, 'time_table.html')
-    # here i should use all in level cuz this relation is many to many . it has own way to handle
-    elif user.is_doctor:
-        levels = user.doctor_user.level.all()
-        department = user.doctor_user.department
-        for level in levels:
-            try:
-                time_table = TimeTable.objects.get(level=level, department=department)
-                context = {'time_table_image': time_table.Timage}
-                return render(request, 'time_table.html', context)
-            except TimeTable.DoesNotExist:
-                continue  
+def user_timetable(request):
+    timetable_image = None
+     
+    if hasattr(request.user, 'doctor_user'):
+        doctor = get_object_or_404(Doctor, user=request.user)
+        timetable_image = doctor.timeTableImage
+ 
+    elif hasattr(request.user, 'student_user'):
+       
+        student = get_object_or_404(Student, user=request.user)
+        timetable = get_object_or_404(TimeTable, level=student.level, department=student.department)
+        timetable_image = timetable.Timage
+        
 
-        return render(request, 'time_table.html')
+    context = {
+        'timetable_image': timetable_image,
+    }
+    return render(request, 'time_table.html', context)

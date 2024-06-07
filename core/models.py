@@ -18,6 +18,7 @@ class Person(models.Model):
 class Doctor(Person):
     subject = models.ManyToManyField('Subject', related_name='doctor_subject')
     level = models.ManyToManyField('Level', related_name='doctor_level')
+    timeTableImage = models.ImageField(upload_to='doctorTimeTable/', null=True, blank=True)
 
     def __str__(self):
         return self.name

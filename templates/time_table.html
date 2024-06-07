@@ -12,10 +12,14 @@
     <div class="container-fluid" id="cont">
       <div class="row">
         <div class="col-md-12">
+          {% if timetable_image %}
+
           <div class="card text-bg-dark">
-            <img src="{{time_table_image.url}}" class="card-img" alt="...">
+            <img src="{{ timetable_image.url }}" class="card-img" alt="...">
           </div>
-  
+          {% else %}
+          <p>No timetable available.</p>
+      {% endif %}
         </div>
       </div>
     </div>
