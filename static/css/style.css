@@ -1,9 +1,10 @@
 
 body{
   overflow-x: hidden;
+  background-color: #F4F6F9;
 }
 :root{
-  --offcanvas-width:270px;
+  --offcanvas-width:260px;
   --top_navpare_hight:0px;
   --main-width:150px;
 }
@@ -55,8 +56,8 @@ body{
     margin-left: var(--offcanvas-width);
   }
   .navbar{
-    margin-left: 300px;
-    
+    width: calc(100% - var(--offcanvas-width));
+    margin-left: var(--offcanvas-width);
   }
   #offcanvasExample{
     transform: none;
