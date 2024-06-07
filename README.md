@@ -83,9 +83,9 @@ The Attendance System is a Django-based web application designed to manage atten
 
 ## Project Structure
 
-- **core:** Contains the main settings and configuration for the Django project.
-- **media:** Directory for user-uploaded media files.
-- **project:** Contains the main application code.
+- **core:** Contains the main models and views for the attendnace system.                                                                                                                                                                               
+- **media:** Directory for user-uploaded media files.                                                                                                                                                                
+- **project:** Contains the main settings and configuration for the Django project.
 - **static:** Directory for static files (CSS, JavaScript, images).
 - **templates:** HTML templates for the project.
 - **users:** User management and authentication.
