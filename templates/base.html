@@ -147,10 +147,6 @@
   </div>
 </div>
 
-
-{% block body %}
-    
-{% endblock body %}
 {% if messages %}
         <div class="messages">
             {% for message in messages %}
@@ -158,6 +154,10 @@
             {% endfor %}
         </div>
     {% endif %}
+{% block body %}
+    
+{% endblock body %}
+
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 </body>

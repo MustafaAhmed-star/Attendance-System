@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from .models import User ,Feedback
+from .models import User, Feedback
 from django.contrib.auth.hashers import make_password
 from core.models import Student, Doctor, Subject, Department, Level, Attendance, TimeTable
 from datetime import date
@@ -27,10 +27,12 @@ class CustomUserAdmin(admin.ModelAdmin):
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
         ('Roles', {'fields': ('is_student', 'is_doctor')}),
     )
+
     def save_model(self, request, obj, form, change):
         if 'password' in form.changed_data:
             obj.password = make_password(obj.password)
         super().save_model(request, obj, form, change)
+
 admin_site.register(User, CustomUserAdmin)
 
 class AttendanceAdmin(admin.ModelAdmin):
@@ -39,18 +41,21 @@ class AttendanceAdmin(admin.ModelAdmin):
     search_fields = ('student__name', 'subject__sname')
     
     def save_model(self, request, obj, form, change):
-        if Attendance.objects.filter(student=obj.student, subject=obj.subject, date=date.today()).exists():
+        # Check if attendance already recorded for the student, subject, and date
+        if Attendance.objects.filter(student=obj.student, subject=obj.subject, date=obj.date).exists():
             messages.error(request, "Attendance for this student and subject has already been recorded today.")
-        else:
-            super().save_model(request, obj, form, change)
+            return
+        super().save_model(request, obj, form, change)
 
     def count_attendance(self, obj):
-        return Attendance.objects.filter(student=obj.student, subject=obj.subject,status = True).count()
+        return Attendance.objects.filter(student=obj.student, subject=obj.subject, status=True).count()
     count_attendance.short_description = 'Total Attendance for Subject'
+
 class FeedbackAdmin(admin.ModelAdmin):
     list_display = ('student', 'subject', 'created_at')
     search_fields = ('student__username', 'subject')
     list_filter = ('created_at',)
+
 # Register your models here.
 admin_site.register(Student)
 admin_site.register(Doctor)
@@ -59,4 +64,4 @@ admin_site.register(Department)
 admin_site.register(Level)
 admin_site.register(TimeTable)
 admin_site.register(Attendance, AttendanceAdmin)  # Register Attendance with AttendanceAdmin
-admin_site.register(Feedback,FeedbackAdmin)
+admin_site.register(Feedback, FeedbackAdmin)
