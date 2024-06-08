@@ -69,7 +69,7 @@ def submit_attendance(request, subject_id):
             messages.success(request, message)
         else:
             messages.success(request, 'All students are marked present.')
-
+            return redirect('subjects_by_level')
         return HttpResponseRedirect(reverse('lec_attendance', args=[subject_id]))
     else:
         return redirect('subjects_by_level')
