@@ -26,7 +26,12 @@ The Attendance System is a Django-based web application designed to manage atten
 
 - Python 3.x
 - Django
-- PostgreSQL (or any preferred database)
+- MySQL                                                                                                  
+  
+  
+  
+  
+  
 - Git
 
 ### Installation
